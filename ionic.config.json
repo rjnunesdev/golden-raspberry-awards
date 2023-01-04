@@ -1,0 +1,8 @@
+{
+  "name": " golden-raspberry-awards",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "06c3ff68"
+}
