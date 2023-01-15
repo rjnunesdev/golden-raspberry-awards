@@ -1,0 +1,46 @@
+<ion-card id="winIntervalProducer" *ngIf="this.winIntervalProducer; else elseBlock">
+  <ion-card-header>
+    <ion-card-title>Producers with longest and shortest interval between wins</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="card">
+    <div *ngIf="this.winIntervalProducer.max">
+      <h2>Maximum</h2>
+      <ion-grid class="ion-margin">
+        <ion-row class="ion-header-grid">
+          <ion-col>Producer</ion-col>
+          <ion-col size="2">Interval</ion-col>
+          <ion-col>Previous Year</ion-col>
+          <ion-col>Following Year</ion-col>
+        </ion-row>
+        <ion-row class="ion-row-grid" *ngFor="let item of this.winIntervalProducer.max">
+          <ion-col>{{item.producer}}</ion-col>
+          <ion-col size="2">{{item.interval}}</ion-col>
+          <ion-col>{{item.previousWin}}</ion-col>
+          <ion-col>{{item.followingWin}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="this.winIntervalProducer.min">
+      <h2>Minimum</h2>
+      <ion-grid class="ion-margin">
+        <ion-row class="ion-header-grid">
+          <ion-col>Producer</ion-col>
+          <ion-col size="2">Interval</ion-col>
+          <ion-col>Previous Year</ion-col>
+          <ion-col>Following Year</ion-col>
+        </ion-row>
+        <ion-row class="ion-row-grid" *ngFor="let item of this.winIntervalProducer?.min">
+          <ion-col>{{item.producer}}</ion-col>
+          <ion-col size="2">{{item.interval}}</ion-col>
+          <ion-col>{{item.previousWin}}</ion-col>
+          <ion-col>{{item.followingWin}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card-content>
+</ion-card>
+<ng-template #elseBlock>
+  <div>
+    No content
+  </div>
+</ng-template>

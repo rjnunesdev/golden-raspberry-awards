@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  api: 'https://tools.texoit.com/backend-java/api',
   production: false
 };
 

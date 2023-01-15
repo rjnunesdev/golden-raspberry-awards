@@ -1,0 +1,22 @@
+<ion-card id="multipleWinners" *ngIf="this.multipleWinners?.years; else elseBlock">
+  <ion-card-header>
+    <ion-card-title>List years with multiple winners</ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="card">
+    <ion-grid fixed>
+      <ion-row class="ion-header-grid">
+        <ion-col>Year</ion-col>
+        <ion-col>Win Count</ion-col>
+      </ion-row>
+      <ion-row class="ion-row-grid" *ngFor="let item of this.multipleWinners.years">
+        <ion-col>{{item?.year}}</ion-col>
+        <ion-col>{{item?.winnerCount}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+<ng-template #elseBlock>
+  <div>
+    No content
+  </div>
+</ng-template>

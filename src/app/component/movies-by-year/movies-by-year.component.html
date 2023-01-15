@@ -1,0 +1,31 @@
+<ion-card id="moviesByYear">
+  <ion-card-header>
+    <ion-card-title>List movie winners by year</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div style="padding-top: 10px;">
+      <input [(ngModel)]="this.yearFilter" style="width:85%" type="number" display="inline-block" matInput placeholder="Search by year" #input>
+      <ion-button size="small" (click)="applyFilter($event)">
+        <ion-icon slot="icon-only" name="search" ></ion-icon>
+      </ion-button>
+    </div>
+    <ion-grid class="ion-margin">
+      <ion-row class="ion-header-grid">
+        <ion-col>Id</ion-col>
+        <ion-col>Year</ion-col>
+        <ion-col>Title</ion-col>
+      </ion-row>
+      <ng-container *ngIf="this.moviesByYear; then thenTemplate; else elseTemplate"></ng-container>
+      <ng-template #thenTemplate>
+        <ion-row class="ion-row-grid" *ngFor="let item of this.moviesByYear">        
+          <ion-col>{{item.id}}</ion-col>
+          <ion-col>{{item.year}}</ion-col>
+          <ion-col>{{item.title}}</ion-col>
+        </ion-row>        
+      </ng-template>
+      <ng-template #elseTemplate>
+        <div></div> 
+      </ng-template>      
+    </ion-grid>
+  </ion-card-content>
+</ion-card>  

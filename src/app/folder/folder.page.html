@@ -1,21 +1,119 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content class="ion-padding">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card id="multipleWinners" *ngIf="this.multipleWinners?.years; else elseBlock">
+            <ion-card-header>
+              <ion-card-title>List years with multiple winners</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="card">
+              <ion-grid class="ion-margin">
+                <ion-row class="ion-header-grid">
+                  <ion-col size="6">Year</ion-col>
+                  <ion-col size="6">Win Count</ion-col>
+                </ion-row>
+                <ion-row *ngFor="let item of this.multipleWinners.years">
+                  <ion-col size="6">{{item?.year}}</ion-col>
+                  <ion-col size="6">{{item?.winnerCount}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card id="winIntervalProducer" *ngIf="this.winIntervalProducer; else elseBlock">
+            <ion-card-header>
+              <ion-card-title>Producers with longest and shortest interval between wins</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="card">
+              <div *ngIf="this.winIntervalProducer.max">
+                <h2>Maximum</h2>
+                <ion-grid class="ion-margin">
+                  <ion-row class="ion-header-grid">
+                    <ion-col size="3">Producer</ion-col>
+                    <ion-col size="3">Interval</ion-col>
+                    <ion-col size="3">Previous Year</ion-col>
+                    <ion-col size="3">Following Year</ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let item of this.winIntervalProducer.max">
+                    <ion-col size="3">{{item.producer}}</ion-col>
+                    <ion-col size="3">{{item.interval}}</ion-col>
+                    <ion-col size="3">{{item.previousWin}}</ion-col>
+                    <ion-col size="3">{{item.followingWin}}</ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+              <div *ngIf="this.winIntervalProducer.min">
+                <h2>Minimum</h2>
+                <ion-grid class="ion-margin">
+                  <ion-row class="ion-header-grid">
+                    <ion-col size="3">Producer</ion-col>
+                    <ion-col size="3">Interval</ion-col>
+                    <ion-col size="3">Previous Year</ion-col>
+                    <ion-col size="3">Following Year</ion-col>
+                  </ion-row>
+                  <ion-row *ngFor="let item of this.winIntervalProducer?.min">
+                    <ion-col size="3">{{item.producer}}</ion-col>
+                    <ion-col size="3">{{item.interval}}</ion-col>
+                    <ion-col size="3">{{item.previousWin}}</ion-col>
+                    <ion-col size="3">{{item.followingWin}}</ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card id="topWinners" *ngIf="this.topWinners; else elseBlock">
+            <ion-card-header>
+              <ion-card-title>Top 3 studios with winners</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-grid class="ion-margin">
+                <ion-row class="ion-header-grid">
+                  <ion-col size="6">Name</ion-col>
+                  <ion-col size="6">Win Count</ion-col>
+                </ion-row>
+                <ion-row *ngFor="let item of this.topWinners.studios | slice:0:3; let i=index">
+                  <ion-col size="6">{{item.name}}</ion-col>
+                  <ion-col size="6">{{item.winCount}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card id="moviesByYear" *ngIf="this.moviesByYear; else elseBlock">
+            <ion-card-header>
+              <ion-card-title>List movie winners by year</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <input [(ngModel)]="this.yearFilter" matInput placeholder="Search by year" #input>
+              <ion-button (click)="applyFilter($event)">
+                <ion-icon slot="icon-only" name="search" ></ion-icon>
+              </ion-button>
+              <ion-grid class="ion-margin">
+                <ion-row class="ion-header-grid">
+                  <ion-col size="4">Id</ion-col>
+                  <ion-col size="4">Year</ion-col>
+                  <ion-col size="4">Title</ion-col>
+                </ion-row>
+                <ion-row *ngFor="let item of this.moviesByYear">
+                  <ion-col size="4">{{item.id}}</ion-col>
+                  <ion-col size="4">{{item.year}}</ion-col>
+                  <ion-col size="4">{{item.title}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ng-template #elseBlock>
+      <div>
+        No content
+      </div>
+    </ng-template>
 </ion-content>

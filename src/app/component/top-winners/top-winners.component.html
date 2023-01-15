@@ -1,0 +1,22 @@
+<ion-card id="topWinners" *ngIf="this.topWinners; else elseBlock">
+  <ion-card-header>
+    <ion-card-title>Top 3 studios with winners</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid class="ion-margin">
+      <ion-row class="ion-header-grid">
+        <ion-col>Name</ion-col>
+        <ion-col>Win Count</ion-col>
+      </ion-row>
+      <ion-row class="ion-row-grid" *ngFor="let item of this.topWinners.studios | slice:0:3; let i=index">
+        <ion-col>{{item.name}}</ion-col>
+        <ion-col>{{item.winCount}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+<ng-template #elseBlock>
+  <div>
+    No content
+  </div>
+</ng-template>
