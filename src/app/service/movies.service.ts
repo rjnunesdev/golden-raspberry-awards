@@ -82,14 +82,17 @@ export class MoviesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getListMovies(page: number, size: number, winner:boolean, year?: number): Observable<DataMovie> {
+  getListMovies(page: number, size: number, winner:any, year: any): Observable<DataMovie> {
     let params: any = {
       page,
-      size,
-      winner
+      size
     }
 
-    if(year) {
+    if(winner !== null && winner !== undefined){
+      params['winner'] = winner
+    }
+
+    if(year !== null && year !== undefined) {
       params['year'] = year;
     }
     

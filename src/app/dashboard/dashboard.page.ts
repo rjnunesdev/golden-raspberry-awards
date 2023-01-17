@@ -14,7 +14,6 @@ import { Injectable } from '@angular/core';
 export class DashboardPage implements OnInit {
   public folder!: string;
 
-  public movies!: DataMovie;
 
   constructor(private activatedRoute: ActivatedRoute, public moviesService: MoviesService) { }
 
@@ -24,13 +23,6 @@ export class DashboardPage implements OnInit {
 
   ionViewDidEnter() {
     
-    this.updateMovies();
-  }
-  
-  updateMovies(page: number = 1, size: number = 15, winner: boolean = true, year?: number){
-    this.moviesService.getListMovies(page, size, winner, year).subscribe((response) => {
-      this.movies = response;
-    });
   }
 
 }

@@ -1,0 +1,57 @@
+<ion-card id="topWinners">
+  <ion-card-header>
+    <ion-card-title>Top 3 studios with winners</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid class="custom">
+      <ion-row class="ion-header-grid">
+        <ion-col>ID</ion-col>
+        <ion-col>
+          <div>
+            <div>Year</div>
+            <div>
+              <ion-input [(ngModel)]="this.yearFilter" (ionChange)="yearFilterChanged()" 
+              type="number" placeholder="Filter by year" debounce="1000"></ion-input>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>Title</ion-col>
+        <ion-col>
+          <div>
+            <div>Winner?</div>
+            <div>
+              <ion-select [compareWith]="compareWith" (ionChange)="winnerOptionsChanged($event)" [multiple]="true">
+                <ion-select-option *ngFor="let option of winnerOptions" [value]="option.value">
+                  {{ option.text }}
+                </ion-select-option>
+              </ion-select>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-row-grid" *ngFor="let item of this.moviesFiltered">
+        <ion-col>{{item.id}}</ion-col>
+        <ion-col>{{item.year}}</ion-col>
+        <ion-col>{{item.title}}</ion-col>
+        <ion-col>{{item.winner}}</ion-col>
+      </ion-row>
+    </ion-grid>
+    <mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="length"
+               [pageSize]="pageSize"
+               [disabled]="disabled"
+               [showFirstLastButtons]="showFirstLastButtons"
+               [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+               [hidePageSize]="hidePageSize"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+  </mat-paginator>
+  </ion-card-content>
+</ion-card>
+<ng-template #elseBlock>
+  <div>
+    No content
+  </div>
+</ng-template>

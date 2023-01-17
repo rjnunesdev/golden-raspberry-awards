@@ -1,3 +1,4 @@
+// import { MatPaginator } from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +27,8 @@ import { WinIntervalProducerComponent } from '../component/win-interval-producer
     MoviesByYearComponent, 
     MultipleWinnersComponent,
     TopWinnersComponent, 
-    WinIntervalProducerComponent
+    WinIntervalProducerComponent,
+    // MatPaginator
   ]
 })
 export class DashboardPageModule {}
